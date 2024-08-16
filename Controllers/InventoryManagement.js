@@ -271,12 +271,13 @@ exports.PurchaseOrderLines = async(req, res) => {
         }
 
         const CustomerName = await Location.findById({ _id: location_ID });
-        const UpdateUserProfile = await UserActivity.findOneAndUpdate({ _id: CustomerName._id }, {
+        const UpdateUserProfile = await UserActivity.findOneAndUpdate({ Location_ID: CustomerName._id }, {
             $push: {
                 PurchaseOrder: FindProduct._id
             }
         }, { new: true });
         // create purchase order 
+
         const CreatPurchaseOrder = await PO.create({
             location_ID: location_ID,
             CreatedOn: Date.now(),
@@ -318,8 +319,8 @@ exports.PurchaseOrderLines = async(req, res) => {
             TotalPrice: ((FindProduct.PurchasePrice) * OrderQTY),
 
         });
-        console.log("5")
-            // Update payment detailes 
+
+        // Update payment detailes 
         const FindPaymentIdAndUpdate = await PaymentGitwaya.findByIdAndUpdate({ _id: PaymentId }, {
             success: true,
             CustromeId: location_ID,
