@@ -37,5 +37,5 @@ app.listen(process.env.PORT, () => {
 })
 
 app.get('/', (req, res) => {
-    return res.send("hello baby");
+    return res.send("hello");
 })

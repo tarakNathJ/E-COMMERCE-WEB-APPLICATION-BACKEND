@@ -636,7 +636,7 @@ exports.SearchingProduct = async(req, res) => {
     try {
         const { UOM } = req.body;
         const Uom = UOM.toUpperCase();
-        console.log(Uom);
+
         const FindProduct = await Variants.find({ UOM: Uom });
 
         return res.status(200).json({
