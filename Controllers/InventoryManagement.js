@@ -252,7 +252,7 @@ exports.PurchaseOrderLines = async(req, res) => {
         const location_ID = req.user.Location_ID;
 
         const { ItemName, Size = "", SKU, UOM, OrderQTY, OrderType, LOC, CC, PaymentId } = req.body;
-        console.log("PaymentId :", PaymentId);
+
         if (!ItemName || !SKU || !UOM || !OrderQTY || !LOC || !CC || !OrderType || !PaymentId) {
             return res.status(401).json({
                 success: false,

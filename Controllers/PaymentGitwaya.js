@@ -11,7 +11,7 @@ require('dotenv').config();
 
 exports.RazorpayPaymentOrder = async(req, res) => {
     const { Amount } = req.body;
-    console.log(Amount);
+
 
     try {
         const Option = {
@@ -19,6 +19,13 @@ exports.RazorpayPaymentOrder = async(req, res) => {
             currency: "INR",
             receipt: crypto.randomBytes(10).toString('hex'),
 
+        }
+        const Key = process.env.RAZORPAY_KEY
+        if (!Key) {
+            return res.status(400).json({
+                success: false,
+                message: "key are not exit",
+            })
         }
         RazorpayInstance.orders.create(Option, (error, order) => {
             if (error) {
@@ -28,16 +35,18 @@ exports.RazorpayPaymentOrder = async(req, res) => {
                     message: "Something Went Wrong ! to creating Order in Payment Gatway"
                 })
             }
+
             res.status(200).json({
                 success: true,
                 message: "Order create success fully ",
-                data: order
+                data: order,
+                ApiKey: Key,
             })
         })
 
 
     } catch (error) {
-        console.log(error);
+
         return res.status(500).json({
             success: false,
             message: "Internal Server Error! in PaymentGitway"
@@ -85,7 +94,7 @@ exports.RazorpayPaymmentVerify = async(req, res) => {
             success: false,
             message: "Internal Server Error!"
         });
-        console.log(error);
+
 
     }
 

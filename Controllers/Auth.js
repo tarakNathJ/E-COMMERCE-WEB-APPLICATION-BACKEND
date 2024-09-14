@@ -40,7 +40,7 @@ exports.SendMail = async(req, res) => {
         return res.status(200).json({
             success: true,
             saveData,
-            emailResponse
+
         })
 
 
@@ -176,12 +176,9 @@ exports.login = async(req, res) => {
             });
 
         }
-        // console.log(Email, "   ", password)
-
-        // console.log(user);
 
         // generate jwt ,after password  matching
-        if (await bcrypt.compare(password, user.Password)) {
+        if (bcrypt.compare(password, user.Password)) {
             const payload = {
                 email: user.Email,
                 id: user._id,
