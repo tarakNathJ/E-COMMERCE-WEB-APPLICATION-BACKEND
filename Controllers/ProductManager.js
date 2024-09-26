@@ -89,7 +89,7 @@ exports.Product = async(req, res) => {
 
         console.log("five");
         // return success responce 
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             message: `your entry save success fully`,
             UpdateUserActivation,
@@ -297,6 +297,15 @@ exports.ProductVariantsController = async(req, res) => {
             }
         })
 
+        // chack serice id are present or not
+        if (!serice_Id_Is) {
+            return res.status(400).json({
+                success: false,
+                message: "id not found",
+            })
+        }
+
+
 
         // upload image
         let imageUrl;
@@ -326,13 +335,6 @@ exports.ProductVariantsController = async(req, res) => {
         }
 
 
-        // chack serice id are present or not
-        if (!serice_Id_Is) {
-            return res.status(400).json({
-                success: false,
-                message: "id not found",
-            })
-        }
 
 
         // save data
