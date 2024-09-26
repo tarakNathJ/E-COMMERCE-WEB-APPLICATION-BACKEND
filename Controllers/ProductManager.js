@@ -284,6 +284,12 @@ exports.ProductVariantsController = async(req, res) => {
 
         // find brand for sales man to chack brand serice name
         const productSericeID = await Product.findById({ _id: productId });
+        if (!productSericeID) {
+            return res.status(404).json({
+                success: false,
+                message: "Brand ID are not find"
+            })
+        }
 
         // chack serice name are all ready present or not
         findSerice = await (productSericeID.product_serice);
