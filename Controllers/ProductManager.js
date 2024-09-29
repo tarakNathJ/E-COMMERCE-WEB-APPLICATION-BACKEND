@@ -228,6 +228,20 @@ exports.Product_Serice_Controller = async(req, res) => {
 }
 
 // create itme 
+const SerchingSericeId = async(Data, ProductSericeName) => {
+    try {
+        await Data.map(async(data) => {
+            if (data.SericeName === ProductSericeName) {
+                return data._id;
+            }
+        })
+        return undefined;
+    } catch (error) {
+        return error;
+    }
+
+}
+
 exports.ProductVariantsController = async(req, res) => {
     try {
         const location_ID = req.user.Location_ID;
@@ -258,7 +272,7 @@ exports.ProductVariantsController = async(req, res) => {
         let productId;
         let findSerice;
         let findSupplier;
-        let serice_Id_Is;
+
         let FindProductId;
 
 
@@ -283,7 +297,7 @@ exports.ProductVariantsController = async(req, res) => {
         productId = FindProductId.Product_ID;
 
         // find brand for sales man to chack brand serice name
-        const productSericeID = await Product.findById({ _id: productId });
+        const productSericeID = await Product.findById({ _id: productId }).populate("product_serice");
         if (!productSericeID) {
             return res.status(404).json({
                 success: false,
@@ -291,15 +305,17 @@ exports.ProductVariantsController = async(req, res) => {
             })
         }
 
+
+
         // chack serice name are all ready present or not
-        findSerice = await (productSericeID.product_serice);
+        findSerice = (productSericeID.product_serice);
 
+
+        //////////////////////////
+        let serice_Id_Is = undefined;
         findSerice.map(async(data) => {
-
-            let chack = await ProductSerice.findById({ _id: data });
-            if (chack.SericeName == ProductSericeName) {
-
-                serice_Id_Is = chack._id;
+            if (data.SericeName === ProductSericeName) {
+                serice_Id_Is = data._id;
             }
         })
 
@@ -310,7 +326,6 @@ exports.ProductVariantsController = async(req, res) => {
                 message: "id not found",
             })
         }
-
 
 
         // upload image
