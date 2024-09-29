@@ -51,7 +51,7 @@ const VariantsSchema = new mongoose.Schema({
     },
     Catalogs_ID: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+
         ref: "Catalogs"
     },
     PurchasePrice: {
