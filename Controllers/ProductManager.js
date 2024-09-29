@@ -372,7 +372,6 @@ exports.ProductVariantsController = async(req, res) => {
             SUK: SUK,
             UOM: UOM,
             Supplier_ID: findSupplier._id,
-            Catalogs_ID: FindProductId.catalog_ID,
             PurchasePrice: PurchasePrice,
             ListPrice: ListPrice,
             StorageLocation: StorageLocation,
