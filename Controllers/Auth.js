@@ -89,7 +89,7 @@ exports.SignUp = async(req, res) => {
         // chack otp
         const ChackOTP = await OTP_Module.find({ email: Email }).sort({ createdAt: -1 }).limit(1);
 
-        console.log(ChackOTP);
+        
         if (ChackOTP[0].email !== Email) {
             return res.status(401).json({
                 success: false,

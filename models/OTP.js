@@ -28,8 +28,6 @@ const OTPschema = new mongoose.Schema({
 async function sendVerificationEmail(email, otp) {
     try {
         const mailRseponse = await MailSender(email, "varification email for stadyNotion", otp);
-        console.log("email send success fully : ", mailRseponse);
-
     } catch (error) {
         console.log("error occured while sending mails: ", error);
         // throw error;
@@ -39,6 +37,6 @@ async function sendVerificationEmail(email, otp) {
 OTPschema.post("save", async function(next) {
     await sendVerificationEmail(this.email, this.otp);
 
-    next;
+    next();
 })
 module.exports = mongoose.model("otp", OTPschema);
