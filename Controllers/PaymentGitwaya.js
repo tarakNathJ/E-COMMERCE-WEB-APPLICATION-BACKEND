@@ -20,7 +20,7 @@ exports.RazorpayPaymentOrder = async(req, res) => {
             receipt: crypto.randomBytes(10).toString('hex'),
 
         }
-        const Key = process.env.RAZORPAY_KEY
+        const Key = process.env.key_id
         if (!Key) {
             return res.status(400).json({
                 success: false,
