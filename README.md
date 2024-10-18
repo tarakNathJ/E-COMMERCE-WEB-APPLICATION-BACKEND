@@ -4,7 +4,7 @@ this is a MERN STACK Web Application
 and this is a fully functional Ecommerce web Applicetion,
 this is only for large screen and  middem screen are acceptable
 
-this also deploy for netlify :- https://mellow-tanuki-ad1b8c.netlify.app
+this also deploy for netlify :- ** https://mellow-tanuki-ad1b8c.netlify.app  ** for fontend and backend deploy in ** render**
 
 *******************#################################**************************
 Login Email for only ** Custromer ** :- ** dirogi5129@polatrix.com ** and password is  :- 1200yy
